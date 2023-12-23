@@ -21,7 +21,7 @@ if config.config_file_name is not None:
 config.set_main_option(
     "sqlalchemy.url",
     os.getenv(
-        os.environ.get("PG_CONNECTION_STRING"),
+        "PG_CONNECTION_STRING",
         "postgresql+asyncpg://postgres:password@localhost:5432/postgres_db",
     ),
 )
@@ -30,8 +30,8 @@ config.set_main_option(
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from db.models import Base
-import db.models.model_export
+from app.db.models import Base
+import app.db.models.model_export
 
 target_metadata = Base.metadata
 
