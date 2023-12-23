@@ -25,9 +25,10 @@ async def get(
     if surname:
         stmt = stmt.where(DBUser.surname == surname)
 
-    users = await db_session.scalar(stmt.limit(limit))
+    users = await db_session.scalars(stmt.limit(limit))
+    users_list = list(users)
 
-    return [UserSchema(**user) for user in users]
+    return [UserSchema(name=user.name, surname=user.surname) for user in users_list]
 
 
 @user_router.post("/create")
@@ -52,7 +53,7 @@ async def create(
     await db_session.commit()
     await db_session.refresh(new_user)
 
-    return UserSchema(**new_user)
+    return UserSchema(name=new_user.name, surname=new_user.surname)
 
 
 @user_router.get("/greeting")
