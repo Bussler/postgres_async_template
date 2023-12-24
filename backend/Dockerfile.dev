@@ -1,0 +1,9 @@
+FROM python
+WORKDIR /app
+# RUN apt-get update && apt-get install -y --no-install-recommends unixodbc lsb-release libpq-dev \
+#     && apt-get clean all
+
+CMD [ "ls" ]
+RUN pip install -r requirements.txt
+RUN alembic upgrade head
+RUN python app/start_backend.py
