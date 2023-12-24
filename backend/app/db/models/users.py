@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Identity
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
-from db.models import Base
+from app.db.models import Base
 
 
 class DBUser(Base):

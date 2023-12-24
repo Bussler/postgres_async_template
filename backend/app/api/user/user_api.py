@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
-from api.user.schema import UserSchema
-from db.models.model_export import DBUser
-from db import AsyncSession, get_session
+from app.api.user.schema import UserSchema
+from app.db.models.model_export import DBUser
+from app.db import AsyncSession, get_session
 
 user_router = APIRouter(prefix="/user", tags=["user"])
 
