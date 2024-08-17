@@ -1,13 +1,16 @@
 import argparse
 import json
 import sys
+
 import yaml
-from uvicorn.importer import import_from_string
 from fastapi.openapi.utils import get_openapi
+from uvicorn.importer import import_from_string
+
+DEFAULTAPP = "app.main:app"
 
 parser = argparse.ArgumentParser(prog="create_openapi.py")
 parser.add_argument(
-    "--app", help='App import string. Eg. "main:app"', default="app.main:app"
+    "--app", help='App import string. Eg. "main:app"', default=DEFAULTAPP
 )
 parser.add_argument("--app-dir", help="Directory containing the app", default=None)
 parser.add_argument(

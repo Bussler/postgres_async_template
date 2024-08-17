@@ -1,13 +1,13 @@
-from logging.config import fileConfig
-import os
 import asyncio
+import os
+from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from alembic import context
+from sqlalchemy import engine_from_config, pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from alembic import context
+from app.config import CONFIGS
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -20,18 +20,16 @@ if config.config_file_name is not None:
 
 config.set_main_option(
     "sqlalchemy.url",
-    os.getenv(
-        "PG_CONNECTION_STRING",
-        "postgresql+asyncpg://postgres:password@localhost:5432/postgres_db",
-    ),
+    CONFIGS.instance.POSTGRES_CONFIG.get_connection_string(),
 )
+
+import app.db.models.model_export
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 from app.db.models import Base
-import app.db.models.model_export
 
 target_metadata = Base.metadata
 

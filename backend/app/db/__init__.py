@@ -3,28 +3,36 @@ import os
 from typing import AsyncGenerator
 
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-logger = logging.getLogger(__name__)
+from app import logger
+from app.config import CONFIGS
 
-PG_CONNECTION_STRING = os.environ.get(
-    "PG_CONNECTION_STRING",
-    "postgresql+asyncpg://postgres:password@localhost:5432/postgres_db",
+engine = create_async_engine(
+    CONFIGS.instance.POSTGRES_CONFIG.get_connection_string(), pool_pre_ping=True, echo=False, future=True
 )
 
-async_engine = create_async_engine(
-    PG_CONNECTION_STRING, pool_pre_ping=True, echo=False, future=True
+async_session_factory = async_sessionmaker(
+    engine,
+    expire_on_commit=False,
+    autoflush=False,
+    future=True,
 )
-
-# AsyncSessionLocal = async_sessionmaker(bind=async_engine, autoflush=False, future=True)
 
 
 async def get_session() -> AsyncGenerator[AsyncSession, None]:
-    factory = async_sessionmaker(bind=async_engine, autoflush=False, future=True)
-    async with factory() as session:
+    """Yields connection to currently running db.
+
+    Returns:
+        AsyncIterator[AsyncSession]: Connection to the db.
+
+    Yields:
+        Iterator[AsyncIterator[AsyncSession]]: Connection to the db.
+    """
+    async with async_session_factory() as session:
         try:
             yield session
         except SQLAlchemyError as e:
-            logger.error("SQLAlchemy Error, rollback: ", e)
+            logger.error(f"Error during db transaction: {e}")
             await session.rollback()
             raise

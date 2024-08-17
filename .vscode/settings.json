@@ -1,11 +1,26 @@
 {
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length", "110"],
-    "python.sortImports.enabled": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports.python": true
-    },
     "[python]": {
-        "editor.formatOnSave": true
-    }
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "black-formatter.importStrategy": "fromEnvironment",
+    "black-formatter.args": [
+        "--line-length",
+        "100"
+    ],
+    "isort.importStrategy": "fromEnvironment",
+    "isort.check": true,
+    "flake8.importStrategy": "fromEnvironment",
+    "flake8.path": [
+        "pflake8"
+    ],
+    "editor.formatOnSave": true,
+    "workbench.colorCustomizations": {
+        "[Your Color Theme]": {
+            "editorRuler.foreground": "#ff0000"
+        }
+    },
+    "editor.rulers": [
+        100
+    ]
 }

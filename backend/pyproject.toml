@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["Bussler <maarten.bussler@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.112.0"
+uvicorn = "^0.30.6"
+toml = "^0.10.2"
+sqlalchemy = "^2.0.32"
+alembic = "^1.13.2"
+asyncpg = "^0.29.0"
+pyyaml = "^6.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.7"
+mypy = "^1.11.1"
+isort = "^5.13.2"
+
+[tool.poetry.scripts]
+app = "app.main:main"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = [
+    "E701"
+]
+
+[tool.ruff.format]
+indent-style = "space"
+
+[tool.isort]
+multi_line_output = 3
+
+[tool.mypy]
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+# Untyped Definitions and Calls
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+
+exclude = [ ".venv", ".vscode", ]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

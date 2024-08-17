@@ -1,11 +1,12 @@
 from typing import List, Optional
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from app.api.user.schema import UserSchema
-from app.db.models.model_export import DBUser
 from app.db import AsyncSession, get_session
+from app.db.models.model_export import DBUser
 
 user_router = APIRouter(prefix="/user", tags=["user"])
 
@@ -28,13 +29,13 @@ async def get(
     users = await db_session.scalars(stmt.limit(limit))
     users_list = list(users)
 
-    return [UserSchema(name=user.name, surname=user.surname) for user in users_list]
+    return [UserSchema.model_validate(user) for user in users_list]
 
 
 @user_router.post("/create")
 async def create(
-    name: Optional[str] = None,
-    surname: Optional[str] = None,
+    name: str,
+    surname: str,
     db_session: AsyncSession = Depends(get_session),
 ) -> UserSchema:
     user = await db_session.scalar(
@@ -53,7 +54,7 @@ async def create(
     await db_session.commit()
     await db_session.refresh(new_user)
 
-    return UserSchema(name=new_user.name, surname=new_user.surname)
+    return UserSchema.model_validate(new_user)
 
 
 @user_router.get("/greeting")

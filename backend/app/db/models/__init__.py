@@ -1,5 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase, MappedAsDataclass
+from sqlalchemy.orm import DeclarativeBase
 
 
-class Base(DeclarativeBase, MappedAsDataclass):
+class Base(DeclarativeBase):
     pass

@@ -5,4 +5,4 @@ class UserSchema(BaseModel):
     name: str
     surname: str
 
-    model_config: ConfigDict(from_config="config")
+    model_config = ConfigDict(from_attributes=True)

@@ -6,8 +6,6 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 127.0.0.1:8000:8000
-    environment:
-      - PG_CONNECTION_STRING=postgresql+asyncpg://postgres:password@db:5432/postgres_db
     volumes:
       - ./backend:/app
     depends_on:
@@ -22,7 +20,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=postgres_db
     ports:
-      - 127.0.0.1:5432:5432
+      - 5432:5432
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       timeout: 1s

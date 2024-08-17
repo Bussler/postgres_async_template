@@ -11,6 +11,22 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
-        }
+        },
+        {
+            "name": "FastApi Start",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": false,
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--host",
+                "localhost",
+                "--port",
+                "8001",
+            ],
+            "env": { "CONFIG_PATH": "${workspaceFolder}/backend/config.toml" },
+        },
     ]
 }

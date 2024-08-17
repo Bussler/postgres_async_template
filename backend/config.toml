@@ -1,0 +1,9 @@
+[logging]
+level = "DEBUG"
+
+[postgres]
+database = "postgres_db"
+host = "localhost"
+port = "5432"
+user = "postgres"
+password = "password"
