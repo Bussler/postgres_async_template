@@ -12,8 +12,8 @@ When executing the backend locally, migrate to the latest version with `alembic 
 
 ### Start the backend
 
-- Use the docker composeto initialize the database: `docker compose up -d --build backend`
-- Alternatively use the `backend\start_backend.py` to start the backend locally
+- Use the docker compose to initialize the database: `docker compose up -d --build backend`
+- Alternatively use the `poetry run app` to start the backend locally
 
 ### Create backend endpoints for frontend
 

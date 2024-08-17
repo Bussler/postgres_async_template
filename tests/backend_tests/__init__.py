@@ -1,10 +1,10 @@
-import os
 import json
+import os
 
 from aiohttp import ClientSession
 from faker import Faker
 
-SERVER_URL = "http://localhost:8000"
+SERVER_URL = "http://localhost:8001"
 API_URL = f"{SERVER_URL}/api"
 
 
