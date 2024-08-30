@@ -1,5 +1,3 @@
-import logging
-import os
 from contextlib import asynccontextmanager
 
 import uvicorn
@@ -29,8 +27,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def main():
+
+def main() -> None:
     uvicorn.run("app.main:app", host="localhost", port=8001, reload=True)
-    
+
+
 if __name__ == "__main__":
     main()

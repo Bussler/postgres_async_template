@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Identity, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Identity, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.models import Base
 

@@ -53,7 +53,7 @@ disallow_incomplete_defs = true
 check_untyped_defs = true
 disallow_untyped_decorators = true
 
-exclude = [ ".venv", ".vscode", ]
+exclude = [ ".venv", ".vscode", "*/alembic/" ]
 
 [build-system]
 requires = ["poetry-core"]
